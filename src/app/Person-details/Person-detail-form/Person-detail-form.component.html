@@ -1,0 +1,26 @@
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+    <input type="hidden" name="PersonDetailId" [value]="service.formData.ID" />
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>NAME EN </label>
+            <input class="form-control form-control-lg" placeholder="Full Name" name="cardOwnerName" #cardOwnerName="ngModel" [(ngModel)]="service.formData.NameEN" required [class.invalid]="cardOwnerName.invalid && cardOwnerName.touched">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Family Name</label>
+            <input class="form-control form-control-lg" placeholder="Family Name" name="FamilyName" #cardNumber="ngModel" [(ngModel)]="service.formData.FamilyName" required maxlength="16" minlength="16" [class.invalid]="cardNumber.invalid && cardNumber.touched">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Phone</label>
+            <input class="form-control form-control-lg" placeholder="Phone" name="Phone" #securityCode="ngModel" [(ngModel)]="service.formData.Phone" required maxlength="11" minlength="8" [class.invalid]="securityCode.invalid && securityCode.touched">
+        </div>
+        <div class="form-group col-md-6">
+            <label>pictrue</label>
+            <input class="form-control form-control-lg" placeholder="MM/YY" name="expirationDate" #expirationDate="ngModel" [(ngModel)]="service.formData.ProfileImagePath" required [class.invalid]="expirationDate.invalid && expirationDate.touched">
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">SUBMIT</button>
+    </div>
+</form>
