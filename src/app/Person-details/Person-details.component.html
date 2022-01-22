@@ -16,7 +16,6 @@
                     <th>Email </th>
                     <th>Address</th>
 
-                    <th> City</th>
                     <th></th>
                 </tr>
             </thead>
@@ -27,7 +26,6 @@
                     <td (click)="populateForm(pd)">{{pd.Phone}}</td>
                     <td (click)="populateForm(pd)">{{pd.Email}}</td>
                     <td (click)="populateForm(pd)">{{pd.Address.DescriptionEN}}</td>
-                    <td (click)="populateForm(pd)">{{pd.Address.City.NameEN}}</td>
                     <td>
                         <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(pd.ID)"></i>
                     </td>
