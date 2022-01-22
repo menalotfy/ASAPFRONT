@@ -1,26 +1,46 @@
 <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
-    <input type="hidden" name="PersonDetailId" [value]="service.formData.ID" />
+    <input type="hidden" name="ID" [value]="service.formData.ID" />
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label>NAME EN </label>
-            <input class="form-control form-control-lg" placeholder="Full Name" name="cardOwnerName" #cardOwnerName="ngModel" [(ngModel)]="service.formData.NameEN" required [class.invalid]="cardOwnerName.invalid && cardOwnerName.touched">
+            <label>Description EN </label>
+            <input class="form-control form-control-lg" placeholder="Description EN" name="DescriptionEN" #DescriptionEN="ngModel" [(ngModel)]="service.formData.DescriptionEN" required [class.invalid]="DescriptionEN.invalid && DescriptionEN.touched">
         </div>
         <div class="form-group col-md-6">
-            <label>Family Name</label>
-            <input class="form-control form-control-lg" placeholder="Family Name" name="FamilyName" #cardNumber="ngModel" [(ngModel)]="service.formData.FamilyName" required maxlength="16" minlength="16" [class.invalid]="cardNumber.invalid && cardNumber.touched">
+            <label>Description AR </label>
+            <input class="form-control form-control-lg" placeholder="Description AR" name="DescriptionAR" #DescriptionAR="ngModel" [(ngModel)]="service.formData.DescriptionAR" required [class.invalid]="DescriptionAR.invalid && DescriptionAR.touched">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Postal Code</label>
+            <input class="form-control form-control-lg" placeholder="Postal Code" name="PostalCode" #PostalCode="ngModel" [(ngModel)]="service.formData.PostalCode">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Country</label>
+            <select [(ngModel)]="service.formData.CountryID" name="AddressCountry" class=" form-control form-control-lg " (change)="FilterRegion() ">
+                <option *ngFor=" let x of service.Countries " [value]="x.ID" >{{x.Name}}</option>
+            </select>
         </div>
     </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label>Phone</label>
-            <input class="form-control form-control-lg" placeholder="Phone" name="Phone" #securityCode="ngModel" [(ngModel)]="service.formData.Phone" required maxlength="11" minlength="8" [class.invalid]="securityCode.invalid && securityCode.touched">
+
+    <div class="form-row ">
+
+        <div class="form-group col-md-6 ">
+            <label>Region</label>
+            <select [(ngModel)]="service.formData.RegionID" name="AddressRegion" class="form-control form-control-lg " (change)="FilterCity()">
+              <option > Choice  Region</option>
+
+              <option *ngFor="let x of service.FilterRegions " [value]="x.ID"
+              >{{x.Name}}</option>
+          </select>
         </div>
-        <div class="form-group col-md-6">
-            <label>pictrue</label>
-            <input class="form-control form-control-lg" placeholder="MM/YY" name="expirationDate" #expirationDate="ngModel" [(ngModel)]="service.formData.ProfileImagePath" required [class.invalid]="expirationDate.invalid && expirationDate.touched">
-        </div>
+        <div class="form-group col-md-6 ">
+            <label>City</label>
+            <select [(ngModel)]="service.formData.CityID" name="CityID" class="form-control form-control-lg ">
+              <option>Choice  City</option>
+              <option *ngFor="let x of service.FilterCities" [value]="x.ID" >{{x.Name}}</option>
+          </select> </div>
     </div>
-    <div class="form-group">
-        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">SUBMIT</button>
+    <div class="form-group ">
+        <button class="btn btn-info btn-lg  col-md-6 " type="submit " [disabled]="form.invalid ">SUBMIT</button>
+        <button class="btn btn-danger btn-lg col-md-6 " (click)="reset()">Clear</button>
     </div>
 </form>

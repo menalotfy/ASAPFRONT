@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonDetailService } from '../shared/Person-detail.service';
+import { PersonDetailService } from '../Services/Person/Person-detail.service';
 import { PersonDetail } from '../shared/Person-detail.model';
 import { ToastrService } from 'ngx-toastr';
+import { AddressDetailService } from '../Services/Address/Address-detail.service';
+import { AddressDetail } from '../shared/Address-detail.model';
 
 @Component({
   selector: 'app-Person-details',
@@ -12,10 +14,18 @@ import { ToastrService } from 'ngx-toastr';
 export class PersonDetailsComponent implements OnInit {
 
   constructor(public service: PersonDetailService,
+
+
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.service.refreshList();
+    debugger
+    this.service.GetCountries();
+    this.service.GetRegions();
+    this.service.GetCities();
+    this.service.GetAddress();
+
   }
 
   populateForm(selectedRecord: PersonDetail) {
@@ -28,7 +38,7 @@ export class PersonDetailsComponent implements OnInit {
         .subscribe(
           res => {
             this.service.refreshList();
-            this.toastr.error("Deleted successfully", 'Person Detail Register');
+            this.toastr.error("Deleted successfully", 'Person Detail ');
           },
           err => { console.log(err) }
         )

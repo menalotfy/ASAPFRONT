@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'PaymentApp';
+  constructor(private router:Router)
+  {}
+  title = 'ASAPApp';
+  openAddress(){
+    this.router.navigate(['/Address']);
+  }
+  openPersons(){
+    this.router.navigate(['/Persons']);
+  }
 }

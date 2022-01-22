@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AddressDetailService } from '../shared/Address-detail.service';
+import { AddressDetailService } from '../Services/Address/Address-detail.service';
 import { AddressDetail } from '../shared/Address-detail.model';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,6 +16,12 @@ export class AddressDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.refreshList();
+    this.service.GetCountries();
+    this.service.GetRegions();
+    this.service.GetCities();
+    console.log("this list");
+    console.log(this.service.Countries);
+
   }
 
   populateForm(selectedRecord: AddressDetail) {

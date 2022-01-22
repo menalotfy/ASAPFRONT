@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonDetailService } from 'src/app/shared/Person-detail.service';
+import { PersonDetailService } from 'src/app/Services/Person/Person-detail.service';
 import { NgForm } from '@angular/forms';
 import { PersonDetail } from 'src/app/shared/Person-detail.model';
 import { ToastrService } from 'ngx-toastr';
@@ -13,8 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 export class PersonDetailFormComponent implements OnInit {
 
   constructor(public service: PersonDetailService,
-    private toastr: ToastrService) { }
 
+    private toastr: ToastrService) { }
   ngOnInit(): void {
   }
 
@@ -24,7 +24,24 @@ export class PersonDetailFormComponent implements OnInit {
     else
       this.updateRecord(form);
   }
-
+  FilterRegion()
+  {
+    debugger
+    if(this.service.formData.CountryID)
+   this.service.FilterRegions=this.service.Regions.filter(x=>x.CountryID== this.service.formData.CountryID);
+  }
+  FilterCity()
+  {
+    debugger
+    if(this.service.formData.RegionID)
+   this.service.FilterCities=this.service.Cities.filter(x=>x.RegionID== this.service.formData.RegionID);
+  }
+  FilterAddress()
+  {
+    debugger
+    if(this.service.formData.CityID)
+   this.service.FilterAddress=this.service.Address.filter(x=>x.CityID== this.service.formData.CityID);
+  }
   insertRecord(form: NgForm) {
     this.service.postPersonDetail().subscribe(
       res => {
@@ -47,7 +64,9 @@ export class PersonDetailFormComponent implements OnInit {
     );
   }
 
-
+  reset(){
+    this.service.formData = new PersonDetail();
+  }
   resetForm(form: NgForm) {
     form.form.reset();
     this.service.formData = new PersonDetail();
